@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="AppRpgEtec.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,10 +6,17 @@
     xmlns:viewsUsuarios="clr-namespace:AppRpgEtec.Views.Usuarios"
     xmlns:viewsPersonagens="clr-namespace:AppRpgEtec.Views.Personagens"
     xmlns:viewsDisputas="clr-namespace:AppRpgEtec.Views.Disputas"
+    xmlns:conv="clr-namespace:AppRpgEtec.Converters"
     xmlns:local="clr-namespace:AppRpgEtec"
     xmlns:viewsArmas ="clr-namespace:AppRpgEtec.Views.Armas"
     Title="AppRpgEtec">
 
+    <Shell.Resources>
+        <ResourceDictionary>
+            <conv:ByteArrayToImageSourceConverter x:Key="ByteArayToImage"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+    
     <Shell.FlyoutHeaderTemplate>
 
         <DataTemplate>
@@ -22,7 +29,7 @@
                 <FlexLayout Grid.Row="0" Direction="Row" AlignItems="Center">
                     <Frame Padding="0" CornerRadius="40"
                         HeightRequest="80" WidthRequest="80">
-                        <Image Source="has_logo_transparente.svg"/>
+                        <Image Source="{Binding Foto, Converter={StaticResource ByteArrayToImage}}"/>
                     </Frame>
                     <VerticalStackLayout Padding="10,0,0,0" Spacing="0">
                         <Label Text="App RPG Etec" FontAttributes="Bold" FontSize="Medium"/>
