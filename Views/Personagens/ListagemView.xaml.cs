@@ -7,7 +7,7 @@ public partial class ListagemView : ContentPage
 	ListagemPersonagemViewModel viewModel;
 	public ListagemView()
 	{
-		InitializeComponent();
+        InitializeComponent();
 
 		viewModel = new ListagemPersonagemViewModel();
 		BindingContext = viewModel;
