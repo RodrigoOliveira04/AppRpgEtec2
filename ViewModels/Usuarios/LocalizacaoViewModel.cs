@@ -3,7 +3,6 @@ namespace AppRpgEtec.ViewModels.Usuarios;
 using System.Collections.ObjectModel;
 using AppRpgEtec.Models;
 using AppRpgEtec.Services.Usuarios;
-using AVFoundation;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Map = Microsoft.Maui.Controls.Maps.Map;

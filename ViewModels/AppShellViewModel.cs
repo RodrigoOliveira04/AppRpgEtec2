@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AppRpgEtec.Services.Usuarios;
 using Azure.Storage.Blobs;
-using System.IO;
-using Javax.Security.Auth;
-using System.ComponentModel;
 
 namespace AppRpgEtec.ViewModels
 {
@@ -20,10 +18,12 @@ namespace AppRpgEtec.ViewModels
             uService = new UsuarioService(token);
 
             CarregarUsuarioAzure();
-
         }
 
         private byte[] foto;
+        private string conexaoAzureStorage;
+        private string container;
+
         public byte[] Foto
         {
             get => foto;
@@ -39,14 +39,13 @@ namespace AppRpgEtec.ViewModels
             try
             {
                 int usuarioId = Preferences.Get("UsuarioId", 0);
-                string filename = $"{usuarioId}.jpg";
-                var blobClient = new BlobClient(conexaoAzureStorage, container, filename);
+                string fileName = $"{usuarioId}.jpg";
+                var blobClient = new BlobClient(conexaoAzureStorage, container, fileName);
 
                 if (blobClient.Exists())
                 {
                     Byte[] fileBytes;
-
-                    using(MemoryStream ms = new MemoryStream())
+                    using (MemoryStream ms = new MemoryStream())
                     {
                         blobClient.OpenRead().CopyTo(ms);
                         fileBytes = ms.ToArray();
@@ -56,7 +55,8 @@ namespace AppRpgEtec.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
             }
         }
     }
